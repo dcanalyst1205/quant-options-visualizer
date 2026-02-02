@@ -2,6 +2,8 @@
 
 A professional-grade option pricing tool that calculates and visualizes European option prices using the Black-Scholes model, featuring real-time sensitivity analysis and a Bloomberg Terminal-inspired dark mode interface.
 
+## 🔗 [Live Demo](https://quant-options-visualizer.vercel.app/)
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
@@ -82,12 +84,15 @@ npm run build
 npm start
 ```
 
-## 🚢 Deploy to Vercel
+## 🚢 Deployment
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/quant-options-visualizer)
+This project is deployed on Vercel: **[quant-options-visualizer.vercel.app](https://quant-options-visualizer.vercel.app/)**
 
-1. Push your code to GitHub
-2. Import your repository in [Vercel](https://vercel.com)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dcanalyst1205/quant-options-visualizer)
+
+To deploy your own instance:
+1. Fork this repository
+2. Import your fork in [Vercel](https://vercel.com)
 3. Vercel will automatically detect Next.js and deploy
 
 ## 🗺️ Roadmap
@@ -104,9 +109,9 @@ This project is licensed under the MIT License.
 
 ## 👤 Author
 
-**Your Name**
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
-- GitHub: [@yourusername](https://github.com/yourusername)
+**Hadi**
+- GitHub: [@dcanalyst1205](https://github.com/dcanalyst1205)
+- Project: [QuantOptions Visualizer](https://github.com/dcanalyst1205/quant-options-visualizer)
 
 ## 🙏 Acknowledgments
 
