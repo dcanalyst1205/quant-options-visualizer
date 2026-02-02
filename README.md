@@ -110,6 +110,7 @@ This project is licensed under the MIT License.
 ## 👤 Author
 
 **Hadi**
+- LinkedIn: [Hadi Khan](https://www.linkedin.com/in/hadi-khan-1205hk2005619)
 - GitHub: [@dcanalyst1205](https://github.com/dcanalyst1205)
 - Project: [QuantOptions Visualizer](https://github.com/dcanalyst1205/quant-options-visualizer)
 
