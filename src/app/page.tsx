@@ -1,65 +1,64 @@
-import Image from "next/image";
+
+"use client";
+
+import { useOptionData } from "@/context/OptionContext";
+import { InputPanel } from "@/components/InputPanel";
+import { PriceChart } from "@/components/PriceChart";
+import { PriceHeatmap } from "@/components/PriceHeatmap";
+import { calculateOptionPrice } from "@/lib/blackScholes";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
+  const { data, setData } = useOptionData();
+
+  const callPrice = calculateOptionPrice(data, "call");
+  const putPrice = calculateOptionPrice(data, "put");
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* Input Panel - Fixed on left for large screens or stacked */}
+      <div className="lg:col-span-4 space-y-6">
+        <InputPanel data={data} onChange={setData} />
+
+        {/* Pricing Summary Card */}
+        <Card className="bg-card/50 border-border/50 backdrop-blur-sm">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-primary font-mono tracking-tighter text-lg uppercase">
+              Calculated Prices
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex justify-between items-center p-3 rounded-md bg-chart-1/10 border border-chart-1/20">
+              <span className="font-mono text-sm text-chart-1 uppercase font-bold">Call Option</span>
+              <span className="font-mono text-2xl font-bold text-foreground">
+                ${callPrice.toFixed(4)}
+              </span>
+            </div>
+            <div className="flex justify-between items-center p-3 rounded-md bg-chart-2/10 border border-chart-2/20">
+              <span className="font-mono text-sm text-chart-2 uppercase font-bold">Put Option</span>
+              <span className="font-mono text-2xl font-bold text-foreground">
+                ${putPrice.toFixed(4)}
+              </span>
+            </div>
+            <Separator className="my-2" />
+            <div className="text-xs text-muted-foreground font-mono">
+              Model: Black-Scholes (Standard European)
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="lg:col-span-8 space-y-6">
+        {/* Top Chart: 2D Analysis */}
+        <PriceChart data={data} />
+
+        {/* Bottom Chart: 3D Surface / Heatmap */}
+        <div className="grid grid-cols-1 gap-6">
+          <PriceHeatmap data={data} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
